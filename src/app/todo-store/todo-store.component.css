@@ -1,0 +1,50 @@
+:host {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  .btn-create-todo{
+    margin-block-end: 2rem;
+    background-color: green;
+    color: white;
+  }
+  .container{
+    margin-top: 2rem;
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .btn-delete-todo,
+  .btn-update-todo{
+    margin-block-start: 0.5rem;
+  }
+
+  .btn-delete-todo{
+    background-color: red;
+    color: white;
+  }
+
+  .btn-update-todo{
+    background-color: aqua;
+    color: black;
+  }
+
+  p {
+    font-size: 1.5rem;
+    margin-block-end: 1rem;
+    background-color: lightgray;
+  }
+
+  p:hover {
+    cursor: pointer;
+  }
+
+  span{
+    font-size: 1.5rem;
+  }
+}

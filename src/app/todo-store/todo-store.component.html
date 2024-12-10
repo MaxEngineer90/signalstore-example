@@ -1,0 +1,20 @@
+<h1>Signal Store</h1>
+<h2>Es sind {{ todoCount() }} Todos vorhanden</h2>
+
+<button class="btn-create-todo" (click)="createNewTodo()">Neues Todo erstellen</button>
+
+@for (todo of todos(); track todo.id) {
+  <div class="container">
+    <p (click)="selectTodo(todo.id)">{{ todo.title }}</p>
+    <button class="btn-delete-todo" (click)="deleteTodo(todo.id)">lösche todo</button>
+    <button class="btn-update-todo" (click)="updateTodo(todo.id)">Update Todo</button>
+  </div>
+}
+
+
+@if (selectedTodo().id > 0) {
+  <span>Sie haben das todo mit der id: {{ selectedTodo().id }} und dem Titel: {{ selectedTodo().title }}
+    ausgewählt </span>
+}
+
+
