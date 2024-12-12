@@ -1,4 +1,4 @@
-import {Component, inject, OnInit, Signal} from '@angular/core';
+import {Component, inject, Signal} from '@angular/core';
 import {TodosStore} from '../../+state/todo-store';
 import {TodoDto} from '../../models/todo-dto';
 
@@ -8,26 +8,24 @@ import {TodoDto} from '../../models/todo-dto';
   templateUrl: './todo-store.component.html',
   styleUrl: './todo-store.component.css'
 })
-export class TodoStoreComponent implements OnInit{
+export class TodoStoreComponent {
   readonly store = inject(TodosStore);
   todos: Signal<Array<TodoDto>> = this.store.sortedTodos;
   todoCount = this.store.todoCount;
   selectedTodo = this.store.selectedTodo;
-  ngOnInit(): void {
-    this.store.loadTodos();
-  }
+
 
   selectTodo(id: number) {
     this.store.loadTodoById(id);
   }
 
   createNewTodo(): void {
-    const newTodo: Partial<TodoDto> = { title: 'Neues Todo', completed: false };
+    const newTodo: Partial<TodoDto> = {title: 'Neues Todo', completed: false};
     this.store.createTodo(newTodo);
   }
 
   updateTodo(id: number): void {
-    const updatedTodo: TodoDto = { id, title: 'Aktualisiertes Todo', completed: true };
+    const updatedTodo: TodoDto = {id, title: 'Aktualisiertes Todo', completed: true};
     this.store.updateTodo(updatedTodo);
   }
 

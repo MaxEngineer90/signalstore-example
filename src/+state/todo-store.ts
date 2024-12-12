@@ -1,5 +1,5 @@
 import {TodoDto} from '../models/todo-dto';
-import {patchState, signalStore, withComputed, withMethods, withState} from '@ngrx/signals';
+import {patchState, signalStore, withComputed, withHooks, withMethods, withState} from '@ngrx/signals';
 import {computed, inject} from '@angular/core';
 import {TodoBackendService} from '../service/todo-backend-service';
 import {distinctUntilChanged, exhaustMap, pipe, tap} from 'rxjs';
@@ -117,5 +117,11 @@ export const TodosStore = signalStore(
         })
       )
     )
-  }))
+  })),
+  withHooks({
+    onInit({loadTodos}) {
+      console.log('CALL ON INIT IN HOOK')
+      loadTodos();
+    }
+  })
 );
