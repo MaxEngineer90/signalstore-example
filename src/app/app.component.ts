@@ -1,9 +1,9 @@
 import {Component} from '@angular/core';
-import {TodoStoreComponent} from './todo-store/todo-store.component';
+import {RouterLink, RouterLinkActive, RouterOutlet} from '@angular/router';
 
 @Component({
   selector: 'app-root',
-  imports: [TodoStoreComponent],
+  imports: [RouterLink, RouterLinkActive, RouterOutlet],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

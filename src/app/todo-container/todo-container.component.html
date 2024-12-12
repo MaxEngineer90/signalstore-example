@@ -1,0 +1,9 @@
+<button class="btn-create-todo" (click)="createNewTodo()">create todo</button>
+
+@for (todo of todos(); track todo.id) {
+  <div class="container">
+    <p (click)="markTodoAsSelectedByID(todo.id)">{{ todo.title }}</p>
+    <button class="btn-delete-todo" (click)="deleteTodo(todo.id)">delete todo</button>
+    <button class="btn-update-todo" (click)="updateTodoById(todo.id)">update Todo</button>
+  </div>
+}

@@ -1,10 +1,12 @@
-import {TodoDto} from '../models/todo-dto';
+import {TodoDto} from '../../models/todo-dto';
 import {patchState, signalStore, withComputed, withHooks, withMethods, withState} from '@ngrx/signals';
 import {computed, inject} from '@angular/core';
-import {TodoBackendService} from '../service/todo-backend-service';
+import {TodoBackendService} from '../../service/todo-backend-service';
 import {distinctUntilChanged, exhaustMap, pipe, tap} from 'rxjs';
 import {rxMethod} from '@ngrx/signals/rxjs-interop';
 import {tapResponse} from '@ngrx/operators';
+import {setError, setLoaded, setLoading, withCallState} from '../entity-store/call-state';
+import {HttpErrorResponse} from '@angular/common/http';
 
 type TodoState = {
   todos: Array<TodoDto>;
@@ -24,7 +26,7 @@ const initialState: TodoState = {
 export const TodosStore = signalStore(
   {providedIn: 'root'},
   withState(initialState),
-
+  withCallState(),
   withComputed(({todos, filter}) => ({
     todoCount: computed(() => todos().length),
     sortedTodos: computed(() => {
@@ -39,13 +41,13 @@ export const TodosStore = signalStore(
     loadTodos: rxMethod<void>(
       pipe(
         distinctUntilChanged(),
-        tap(() => patchState(store, {isLoading: true})),
+        tap(() => patchState(store, setLoading())),
         exhaustMap(() => {
           return todoService.getTodos().pipe(
             tapResponse({
               next: (todos: Array<TodoDto>) => patchState(store, {todos}),
-              error: console.error,
-              finalize: () => patchState(store, {isLoading: false}),
+              error: (error: HttpErrorResponse) => setError(error.message),
+              finalize: () => patchState(store, setLoaded()),
             })
           );
         })
@@ -54,13 +56,13 @@ export const TodosStore = signalStore(
     loadTodoById: rxMethod<number>(
       pipe(
         distinctUntilChanged(),
-        tap(() => patchState(store, {isLoading: true})),
+        tap(() => patchState(store, setLoading())),
         exhaustMap((id) => {
           return todoService.getTodoById(id).pipe(
             tapResponse({
               next: (todo: TodoDto) => patchState(store, {selectedTodo: todo}),
-              error: console.error,
-              finalize: () => patchState(store, {isLoading: false}),
+              error: (error: HttpErrorResponse) => setError(error.message),
+              finalize: () => patchState(store, setLoaded()),
             })
           );
         })
@@ -69,13 +71,13 @@ export const TodosStore = signalStore(
 
     createTodo: rxMethod<Partial<TodoDto>>(
       pipe(
-        tap(() => patchState(store, {isLoading: true})),
+        tap(() => patchState(store, setLoading())),
         exhaustMap((todo) => {
           return todoService.createTodo(todo).pipe(
             tapResponse({
               next: (newTodo: TodoDto) => patchState(store, {todos: [...store.todos(), newTodo]}),
-              error: console.error,
-              finalize: () => patchState(store, {isLoading: false}),
+              error: (error: HttpErrorResponse) => setError(error.message),
+              finalize: () => patchState(store, setLoaded()),
             })
           );
         })
@@ -84,7 +86,7 @@ export const TodosStore = signalStore(
 
     updateTodo: rxMethod<TodoDto>(
       pipe(
-        tap(() => patchState(store, {isLoading: true})),
+        tap(() => patchState(store, setLoading())),
         exhaustMap((todo) => {
           return todoService.updateTodo(todo).pipe(
             tapResponse({
@@ -93,8 +95,8 @@ export const TodosStore = signalStore(
                   todos: store.todos().map(t => t.id === updatedTodo.id ? updatedTodo : t),
                 });
               },
-              error: console.error,
-              finalize: () => patchState(store, {isLoading: false}),
+              error: (error: HttpErrorResponse) => setError(error.message),
+              finalize: () => patchState(store, setLoaded()),
             })
           );
         })
@@ -103,15 +105,15 @@ export const TodosStore = signalStore(
 
     deleteTodo: rxMethod<number>(
       pipe(
-        tap(() => patchState(store, {isLoading: true})),
+        tap(() => patchState(store, setLoading())),
         exhaustMap((id) => {
           return todoService.deleteTodo(id).pipe(
             tapResponse({
               next: () => {
                 patchState(store, {todos: store.todos().filter(todo => todo.id !== id)});
               },
-              error: console.error,
-              finalize: () => patchState(store, {isLoading: false}),
+              error: (error: HttpErrorResponse) => setError(error.message),
+              finalize: () => patchState(store, setLoaded()),
             })
           );
         })

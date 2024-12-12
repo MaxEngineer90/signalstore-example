@@ -1,10 +1,14 @@
 import {Component, inject, Signal} from '@angular/core';
-import {TodosStore} from '../../+state/todo-store';
+
 import {TodoDto} from '../../models/todo-dto';
+import {TodosStore} from '../../+state/store/todo-store';
+import {TodoContainerComponent} from '../todo-container/todo-container.component';
 
 @Component({
   selector: 'app-todo-store',
-  imports: [],
+  imports: [
+    TodoContainerComponent
+  ],
   templateUrl: './todo-store.component.html',
   styleUrl: './todo-store.component.css'
 })
@@ -19,13 +23,11 @@ export class TodoStoreComponent {
     this.store.loadTodoById(id);
   }
 
-  createNewTodo(): void {
-    const newTodo: Partial<TodoDto> = {title: 'Neues Todo', completed: false};
+  createNewTodo(newTodo: Partial<TodoDto>): void {
     this.store.createTodo(newTodo);
   }
 
-  updateTodo(id: number): void {
-    const updatedTodo: TodoDto = {id, title: 'Aktualisiertes Todo', completed: true};
+  updateTodo(updatedTodo: TodoDto): void {
     this.store.updateTodo(updatedTodo);
   }
 

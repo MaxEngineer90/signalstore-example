@@ -1,12 +1,14 @@
-<h1>Signal Store</h1>
+<h1>Signal Entity Store</h1>
 <h2>Es sind {{ todoCount() }} Todos vorhanden</h2>
 
 <app-todo-container [todos]="todos()" (selectTodoById)="selectTodo($event)" (createTodo)="createNewTodo($event)"
                     (updateTodo)="updateTodo($event)" (removeTodoById)="deleteTodo($event)"/>
 
+<!--
 @if (selectedTodo().id > 0) {
   <span>Sie haben das todo mit der id: {{ selectedTodo().id }} und dem Titel: {{ selectedTodo().title }}
     ausgewählt </span>
 }
+-->
 
 
