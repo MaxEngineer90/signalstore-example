@@ -2,7 +2,7 @@
 
 ## Packages to install
 
-### signals & ngrx/operators
+### [signals](https://ngrx.io/guide/signals) & [ngrx/operators](https://ngrx.io/guide/operators/operators)
 
 ````bash
 npm install @ngrx/signals --save &&
