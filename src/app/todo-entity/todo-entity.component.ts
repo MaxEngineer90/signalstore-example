@@ -15,12 +15,11 @@ export class TodoEntityComponent {
   readonly entityStore = inject(TodosEntityStore);
   todos: Signal<Array<TodoDto>> = this.entityStore.sortedTodos;
   todoCount = this.entityStore.todoCount;
-
-  //selectedTodo = this.store.selectedTodo;
-
+  selectedTodo = this.entityStore.selectedEntity;
 
   selectTodo(id: number) {
     this.entityStore.loadTodoById(id);
+    this.entityStore.selectTodoById(id);
   }
 
   createNewTodo(newTodo: Partial<TodoDto>): void {

@@ -1,11 +1,12 @@
 import {signalStoreFeature, withComputed, withState} from '@ngrx/signals';
 import {computed} from '@angular/core';
 
-export type CallState = 'init' | 'loading' | 'loaded' | { error: string };
 
-export function withCallState() {
+export type RequestStatusFeature = 'init' | 'loading' | 'loaded' | { error: string };
+
+export function withRequestStatus() {
   return signalStoreFeature(
-    withState<{ callState: CallState }>({callState: 'init'}),
+    withState<{ callState: RequestStatusFeature }>({callState: 'init'}),
     withComputed(({callState}) => ({
       loading: computed(() => callState() === 'loading'),
       loaded: computed(() => callState() === 'loaded'),
@@ -18,14 +19,14 @@ export function withCallState() {
 }
 
 
-export function setLoading(): { callState: CallState } {
+export function setLoading(): { callState: RequestStatusFeature } {
   return {callState: 'loading'};
 }
 
-export function setLoaded(): { callState: CallState } {
+export function setLoaded(): { callState: RequestStatusFeature } {
   return {callState: 'loaded'};
 }
 
-export function setError(error: string): { callState: CallState } {
+export function setError(error: string): { callState: RequestStatusFeature } {
   return {callState: {error}};
 }

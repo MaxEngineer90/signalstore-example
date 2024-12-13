@@ -5,15 +5,17 @@ import {computed, inject} from '@angular/core';
 import {TodoBackendService} from '../../service/todo-backend-service';
 import {rxMethod} from '@ngrx/signals/rxjs-interop';
 import {distinctUntilChanged, exhaustMap, pipe, tap} from 'rxjs';
-import {setError, setLoaded, setLoading, withCallState} from './call-state';
+import {setError, setLoaded, setLoading, withRequestStatus} from '../feature/request-status.feature';
 import {tapResponse} from '@ngrx/operators';
 import {HttpErrorResponse} from '@angular/common/http';
+import {withSelectedEntity} from '../feature/selected-entity.feature';
 
 
 export const TodosEntityStore = signalStore(
   {providedIn: 'root'},
   withEntities<TodoDto>(),
-  withCallState(),
+  withRequestStatus(),
+  withSelectedEntity<TodoDto>(),
   withComputed((store) => ({
     todoCount: computed(() => store.entities().length),
     sortedTodos: computed(() => {
@@ -102,7 +104,14 @@ export const TodosEntityStore = signalStore(
           );
         })
       )
-    )
+    ),
+    selectTodoById: (id: string | number) => {
+      if (store.entityMap()[id]) {
+        patchState(store, {selectedEntityId: id});
+      } else {
+        console.error(`Todo with ID ${id} not found.`);
+      }
+    },
   })),
   withHooks({
     onInit({loadTodos}) {

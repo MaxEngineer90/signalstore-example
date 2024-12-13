@@ -4,9 +4,15 @@
 <app-todo-container [todos]="todos()" (selectTodoById)="selectTodo($event)" (createTodo)="createNewTodo($event)"
                     (updateTodo)="updateTodo($event)" (removeTodoById)="deleteTodo($event)"/>
 
-@if (selectedTodo().id > 0) {
-  <span>Sie haben das todo mit der id: {{ selectedTodo().id }} und dem Titel: {{ selectedTodo().title }}
-    ausgewählt </span>
+@if (selectedTodo()) {
+  <div>
+    <h2>ID: {{ selectedTodo()?.id }}</h2>
+    <h2>Titel: {{ selectedTodo()?.title }}</h2>
+  </div>
+} @else {
+  <p>Kein Todo ausgewählt.</p>
 }
+
+
 
 
