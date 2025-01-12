@@ -6,8 +6,8 @@
 
 @if (selectedTodo()) {
   <div>
-    <h2>ID: {{ selectedTodo()?.id }}</h2>
-    <h2>Titel: {{ selectedTodo()?.title }}</h2>
+    <h2>ID: {{ selectedTodo().id }}</h2>
+    <h2>Title: {{ selectedTodo().title }}</h2>
   </div>
 } @else {
   <p>Kein Todo ausgewählt.</p>
