@@ -1,4 +1,4 @@
-import {Component, inject, Signal} from '@angular/core';
+import {ChangeDetectionStrategy, Component, inject, Signal} from '@angular/core';
 import {TodoDto} from '../../models/todo-dto';
 import {TodosEntityStore} from '../../+state/entity-store/todo-entity-store';
 import {TodoContainerComponent} from '../todo-container/todo-container.component';
@@ -9,7 +9,8 @@ import {TodoContainerComponent} from '../todo-container/todo-container.component
     TodoContainerComponent
   ],
   templateUrl: './todo-entity.component.html',
-  styleUrl: './todo-entity.component.css'
+  styleUrl: './todo-entity.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoEntityComponent {
   readonly entityStore = inject(TodosEntityStore);
