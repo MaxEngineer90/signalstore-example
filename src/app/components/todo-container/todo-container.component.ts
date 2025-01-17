@@ -1,11 +1,11 @@
 import {ChangeDetectionStrategy, Component, input, output} from '@angular/core';
-import {TodoDto} from '../../models/todo-dto';
+import {TodoDto} from '../../../models/todo-dto';
 
 @Component({
   selector: 'app-todo-container',
   imports: [],
   templateUrl: './todo-container.component.html',
-  styleUrl: './todo-container.component.css',
+  styleUrl: './todo-container.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TodoContainerComponent {

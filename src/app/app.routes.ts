@@ -1,6 +1,6 @@
 import {Routes} from '@angular/router';
-import {TodoEntityComponent} from './todo-entity/todo-entity.component';
-import {TodoStoreComponent} from './todo-store/todo-store.component';
+import {TodoEntityComponent} from './components/todo-entity/todo-entity.component';
+import {TodoStoreComponent} from './components/todo-store/todo-store.component';
 
 export const routes: Routes = [
   {path: '', redirectTo: '/store', pathMatch: 'full'},
