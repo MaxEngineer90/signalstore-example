@@ -5,6 +5,7 @@ import {of} from 'rxjs';
 import {provideHttpClientTesting} from '@angular/common/http/testing';
 import {MockService} from 'ng-mocks';
 import {provideHttpClient} from '@angular/common/http';
+import {instance, mock, when} from 'ts-mockito';
 
 export const mockTodos = [
   {id: 1, title: 'Test Todo 1', completed: false},
@@ -14,10 +15,14 @@ export const mockTodos = [
 
 describe('TodosEntityStore', () => {
   let store = TestBed.inject(TodosEntityStore)
-  const todoBackendService: TodoBackendService = MockService(TodoBackendService);
+  const todoBackendService: TodoBackendService = mock(
+    TodoBackendService
+  );
 
   beforeEach(() => {
-    jest.spyOn(todoBackendService, 'getTodos').mockReturnValue(of(mockTodos));
+    when(todoBackendService.getTodos()).thenCall(() => {
+      return of(mockTodos);
+    });
 
 
     // TestBed konfigurieren
@@ -25,7 +30,6 @@ describe('TodosEntityStore', () => {
       providers: [
         TodosEntityStore,
         {provide: TodoBackendService, useValue: todoBackendService},
-        provideHttpClient(),
         provideHttpClientTesting(),
       ],
     });
