@@ -1,39 +1,21 @@
-import {
-  patchState,
-  signalStore,
-  withComputed,
-  withHooks,
-  withMethods,
-} from '@ngrx/signals';
-import {
-  addEntity,
-  removeEntity,
-  setEntities,
-  setEntity,
-  updateEntity,
-  withEntities,
-} from '@ngrx/signals/entities';
-import { TodoDto } from '../../models/todo-dto';
-import { computed, inject } from '@angular/core';
-import { TodoBackendService } from '../../service/todo-backend-service';
-import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { distinctUntilChanged, exhaustMap, pipe, tap } from 'rxjs';
-import {
-  setError,
-  setLoaded,
-  setLoading,
-  withRequestStatus,
-} from '../feature/request-status.feature';
-import { tapResponse } from '@ngrx/operators';
-import { HttpErrorResponse } from '@angular/common/http';
-import { withSelectedEntity } from '../feature/selected-entity.feature';
+import {patchState, signalStore, withComputed, withHooks, withMethods,} from '@ngrx/signals';
+import {addEntity, removeEntity, setEntities, setEntity, updateEntity, withEntities,} from '@ngrx/signals/entities';
+import {TodoDto} from '../../models/todo-dto';
+import {computed, inject} from '@angular/core';
+import {TodoBackendService} from '../../service/todo/todo-backend-service';
+import {rxMethod} from '@ngrx/signals/rxjs-interop';
+import {distinctUntilChanged, exhaustMap, pipe, tap} from 'rxjs';
+import {setError, setLoaded, setLoading, withRequestStatus,} from '../feature/request-status.feature';
+import {tapResponse} from '@ngrx/operators';
+import {HttpErrorResponse} from '@angular/common/http';
+import {withSelectedEntity} from '../feature/selected-entity.feature';
 
 export const TodosEntityStore = signalStore(
-  { providedIn: 'root' },
+  {providedIn: 'root'},
   withEntities<TodoDto>(),
   withRequestStatus(),
   withSelectedEntity<TodoDto>(),
-  withComputed(({ entities }) => ({
+  withComputed(({entities}) => ({
     todoCount: computed(() => entities().length),
     sortedTodos: computed(() => {
       return entities().sort((a, b) => a.title.localeCompare(b.title));
@@ -127,14 +109,14 @@ export const TodosEntityStore = signalStore(
     ),
     selectTodoById: (id: string | number) => {
       if (store.entityMap()[id]) {
-        patchState(store, { selectedEntityId: id });
+        patchState(store, {selectedEntityId: id});
       } else {
         console.error(`Todo with ID ${id} not found.`);
       }
     },
   })),
   withHooks({
-    onInit({ loadTodos }) {
+    onInit({loadTodos}) {
       console.log('CALL ON INIT IN ON ENTITY STATE HOOK');
       loadTodos();
     },

@@ -1,6 +1,6 @@
 import {TodosEntityStore} from './todo-entity-store';
 import {TestBed} from '@angular/core/testing';
-import {TodoBackendService} from '../../service/todo-backend-service';
+import {TodoBackendService} from '../../service/todo/todo-backend-service';
 import {MockService} from 'ng-mocks';
 import {EMPTY, of} from 'rxjs';
 import {TodoDto} from '../../models/todo-dto';
