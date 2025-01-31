@@ -10,6 +10,7 @@ describe('TodosEntityStore', () => {
     { id: 1, title: 'Test Todo 1', completed: false },
     { id: 2, title: 'Test Todo 2', completed: true },
   ];
+
   let todoBackendService: TodoBackendService;
 
   beforeEach(() => {
@@ -20,6 +21,10 @@ describe('TodosEntityStore', () => {
         { provide: TodoBackendService, useValue: todoBackendService },
       ],
     });
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   it('should load todos successfully', () => {
