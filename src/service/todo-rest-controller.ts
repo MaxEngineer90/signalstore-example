@@ -1,13 +1,13 @@
-import {inject, Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {TodoDto} from '../models/todo-dto';
-import {Configuration} from '../config/configuration';
+import { inject, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { TodoDto } from '../models/todo-dto';
+import { Configuration } from '../config/configuration';
 
 @Injectable({
   providedIn: 'root',
 })
-export class TodoBackendService {
+export class TodoRestController {
   private readonly apiUrl = inject(Configuration).baseUrl;
   private readonly http = inject(HttpClient);
 

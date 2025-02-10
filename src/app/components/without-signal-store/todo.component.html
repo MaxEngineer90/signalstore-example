@@ -1,0 +1,8 @@
+<h1>Todo size {{ todoSize() }}</h1>
+
+<app-todo-container
+  [todos]="todos()"
+  (createTodo)="createTodo($event)"
+  (removeTodoById)="deleteTodo($event)"
+  (updateTodo)="updateTodo($event)"
+/>
