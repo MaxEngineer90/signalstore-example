@@ -1,16 +1,18 @@
-import { TodosEntityStore } from './todo-entity-store';
-import { TestBed } from '@angular/core/testing';
-import { TodoBackendService } from '../../service/todo-backend-service';
-import { MockService } from 'ng-mocks';
-import { EMPTY, of } from 'rxjs';
-import { TodoDto } from '../../models/todo-dto';
+import {TodosEntityStore} from './todo-entity-store';
+import {TestBed} from '@angular/core/testing';
+import {TodoBackendService} from '../../service/todo-backend-service';
+import {MockService} from 'ng-mocks';
+import {EMPTY, of} from 'rxjs';
+import {TodoDto} from '../../models/todo-dto';
 
+export type TodosEntityStore = InstanceType<typeof TodosEntityStore>;
 describe('TodosEntityStore', () => {
   const mockTodos = [
-    { id: 1, title: 'Test Todo 1', completed: false },
-    { id: 2, title: 'Test Todo 2', completed: true },
+    {id: 1, title: 'Test Todo 1', completed: false},
+    {id: 2, title: 'Test Todo 2', completed: true},
   ];
 
+  let store: TodosEntityStore;
   let todoBackendService: TodoBackendService;
 
   beforeEach(() => {
@@ -18,9 +20,10 @@ describe('TodosEntityStore', () => {
     jest.spyOn(todoBackendService, 'getTodos').mockReturnValue(of(mockTodos));
     TestBed.configureTestingModule({
       providers: [
-        { provide: TodoBackendService, useValue: todoBackendService },
+        {provide: TodoBackendService, useValue: todoBackendService},
       ],
     });
+    store = TestBed.inject(TodosEntityStore);
   });
 
   afterEach(() => {
@@ -42,8 +45,6 @@ describe('TodosEntityStore', () => {
       mockTodos.push(newTodo);
       return of(newTodo);
     });
-
-    const store = TestBed.inject(TodosEntityStore);
     store.createTodo(newTodo);
     expect(todoBackendService.createTodo).toHaveBeenCalledWith(newTodo);
     store.selectTodoById(newTodo.id);
@@ -52,11 +53,10 @@ describe('TodosEntityStore', () => {
   });
 
   it('should update an existing todo', () => {
-    const updatedTodo = { id: 1, title: 'Updated Todo', completed: false };
-    const store = TestBed.inject(TodosEntityStore);
+    const updatedTodo = {id: 1, title: 'Updated Todo', completed: false};
     jest
       .spyOn(todoBackendService, 'updateTodo')
-      .mockImplementation((todo) => of({ ...todo, completed: todo.completed }));
+      .mockImplementation((todo) => of({...todo, completed: todo.completed}));
     store.updateTodo(updatedTodo);
     expect(todoBackendService.updateTodo).toHaveBeenCalledWith(updatedTodo);
     const storedTodo = store.entityMap()[1];
@@ -64,14 +64,11 @@ describe('TodosEntityStore', () => {
   });
 
   it('should delete a todo', () => {
-    const store = TestBed.inject(TodosEntityStore);
     jest
       .spyOn(todoBackendService, 'deleteTodo')
       .mockImplementation((id) => EMPTY);
     expect(store.entityMap()[1]).toEqual(mockTodos[0]);
     store.deleteTodo(1);
     expect(todoBackendService.deleteTodo).toHaveBeenCalledWith(1);
-
-    console.log(store.entityMap());
   });
 });
