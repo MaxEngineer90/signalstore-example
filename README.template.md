@@ -37,3 +37,4 @@ VERSION=$(node -p "require('./package.json').version") &&
 docker build --build-arg VERSION=$VERSION -t signalstore-tutorial:$VERSION . &&
 docker run -d -p 8080:80 --name my-angular-container signalstore-tutorial:$VERSION
 ````
+
