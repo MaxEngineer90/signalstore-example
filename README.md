@@ -1,5 +1,7 @@
 # SignalstoreTutorial
 
+* Version: **1.0.1**
+
 ## Packages to install
 
 ### [signals](https://ngrx.io/guide/signals) & [ngrx/operators](https://ngrx.io/guide/operators/operators)
@@ -15,4 +17,8 @@ npm install @ngrx/operators --save
 npm start-server
 ````
 
-## [Configure jest](https://medium.com/edataconsulting/how-to-switch-from-karma-to-jest-using-angular-7335588ffdf0) 
+## start frontend
+
+````bash
+ng serve
+````
