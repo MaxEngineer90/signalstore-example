@@ -1,6 +1,6 @@
 # SignalstoreTutorial
 
-* Version: **1.0.1**
+* Version: **{{VERSION}}**
 
 ## Packages to install
 

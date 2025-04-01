@@ -1,6 +1,6 @@
 {
   "name": "signalstore-tutorial",
-  "version": "0.0.0",
+  "version": "1.0.1",
   "scripts": {
     "ng": "ng",
     "start-server": "node backend/app.js",
@@ -8,6 +8,7 @@
     "prebuild": "node generate-title.js && node generate-build-info.js",
     "build": "ng build --configuration production",
     "build-json": "ng build --configuration production --stats-json",
+    "update-readme": "node update-readme.js",
     "watch": "ng build --watch --configuration development",
     "test": "jest",
     "test:watch": "jest --watch"
@@ -39,6 +40,7 @@
     "@ngneat/spectator": "^19.0.0",
     "@semantic-release/changelog": "^6.0.3",
     "@semantic-release/commit-analyzer": "^13.0.1",
+    "@semantic-release/exec": "^7.0.3",
     "@semantic-release/git": "^10.0.1",
     "@semantic-release/npm": "^12.0.1",
     "@semantic-release/release-notes-generator": "^14.0.3",
