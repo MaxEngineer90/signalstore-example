@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
-const port = 8070;
+const port = 3000;
 
 app.use(cors()); // CORS aktivieren
 app.use(express.json()); // Body-Parser für JSON-Daten

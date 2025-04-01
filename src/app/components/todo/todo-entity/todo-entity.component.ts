@@ -4,8 +4,8 @@ import {
   inject,
   Signal,
 } from '@angular/core';
-import { TodoDto } from '../../../models/todo-dto';
-import { TodosEntityStore } from '../../../+state/entity-store/todo-entity-store';
+import { TodoDto } from '../../../../models/todo-dto';
+import { TodosEntityStore } from '../../../../+state/entity-store/todo-entity-store';
 import { TodoContainerComponent } from '../todo-container/todo-container.component';
 
 @Component({

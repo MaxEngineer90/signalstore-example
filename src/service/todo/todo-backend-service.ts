@@ -1,8 +1,8 @@
-import {inject, Injectable} from '@angular/core';
-import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {TodoDto} from '../../models/todo-dto';
-import {Configuration} from '../../config/configuration';
+import { inject, Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { TodoDto } from '../../models/todo-dto';
+import { Configuration } from '../../config/configuration';
 
 @Injectable({
   providedIn: 'root',
@@ -12,22 +12,22 @@ export class TodoBackendService {
   private readonly http = inject(HttpClient);
 
   getTodos(): Observable<TodoDto[]> {
-    return this.http.get<TodoDto[]>(this.apiUrl);
+    return this.http.get<TodoDto[]>(this.apiUrl + '/todos');
   }
 
   getTodoById(id: number): Observable<TodoDto> {
-    return this.http.get<TodoDto>(`${this.apiUrl}/${id}`);
+    return this.http.get<TodoDto>(`${this.apiUrl + '/todos'}/${id}`);
   }
 
   createTodo(todo: Partial<TodoDto>): Observable<TodoDto> {
-    return this.http.post<TodoDto>(this.apiUrl, todo);
+    return this.http.post<TodoDto>(this.apiUrl + '/todos', todo);
   }
 
   updateTodo(todo: TodoDto): Observable<TodoDto> {
-    return this.http.put<TodoDto>(`${this.apiUrl}/${todo.id}`, todo);
+    return this.http.put<TodoDto>(`${this.apiUrl + '/todos'}/${todo.id}`, todo);
   }
 
   deleteTodo(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl + '/todos'}/${id}`);
   }
 }
