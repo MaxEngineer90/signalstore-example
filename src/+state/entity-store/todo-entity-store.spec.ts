@@ -11,6 +11,7 @@ describe('TodosEntityStore', () => {
     {id: 1, title: 'Test Todo 1', completed: false},
     {id: 2, title: 'Test Todo 2', completed: true},
   ];
+
   let store: TodosEntityStore;
   let todoBackendService: TodoBackendService;
 
@@ -25,7 +26,12 @@ describe('TodosEntityStore', () => {
     store = TestBed.inject(TodosEntityStore);
   });
 
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
   it('should load todos successfully', () => {
+    const store = TestBed.inject(TodosEntityStore);
     expect(store.sortedTodos()).toEqual(mockTodos);
   });
 
