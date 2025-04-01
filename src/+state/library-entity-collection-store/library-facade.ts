@@ -34,6 +34,5 @@ export class LibraryFacade {
 
   selectCategory(id: string): void {
     this.store.selectCategory(id);
-    console.log('Selected category ID:', this.selectedCategoryId());
   }
 }

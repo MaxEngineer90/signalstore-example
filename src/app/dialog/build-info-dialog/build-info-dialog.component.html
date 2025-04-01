@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Build Info</h1>
+<div mat-dialog-content>
+  <p><strong>Version:</strong> {{ buildInfo()?.version }}</p>
+  <p>
+    <strong>Build Datum:</strong> {{ buildInfo()?.buildDate | date: "medium" }}
+  </p>
+</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Schließen</button>
+</div>
