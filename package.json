@@ -5,7 +5,9 @@
     "ng": "ng",
     "start-server": "node backend/app.js",
     "start": "ng serve",
-    "build": "ng build",
+    "prebuild": "node generate-title.js && node generate-build-info.js",
+    "build": "ng build --configuration production",
+    "build-json": "ng build --configuration production --stats-json",
     "watch": "ng build --watch --configuration development",
     "test": "jest",
     "test:watch": "jest --watch"
