@@ -39,9 +39,8 @@ jobs:
 
       - name: Build and push frontend image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/tutorials/signalstore-frontend:${{ steps.get_version.outputs.version }} -f Dockerfile.frontend .
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/tutorials/signalstore-frontend:${{ steps.get_version.outputs.version }} -f Dockerfile .
           docker push ${{ secrets.DOCKER_USERNAME }}/tutorials/signalstore-frontend:${{ steps.get_version.outputs.version }}
-
       - name: Build and push backend image
         run: |
           docker build -t ${{ secrets.DOCKER_USERNAME }}/tutorials/signalstore-backend:latest -f backend/Dockerfile .
