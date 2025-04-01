@@ -1,3 +1,10 @@
+## [1.0.1](https://github.com/MaxEngineer90/signalstore-example/compare/v1.0.0...v1.0.1) (2025-04-01)
+
+
+### Bug Fixes
+
+* **release:** add @semantic-release/npm plugin to update package.json version ([4973426](https://github.com/MaxEngineer90/signalstore-example/commit/4973426aa306001e989e6e2654378e301eb0908a))
+
 # 1.0.0 (2025-04-01)
 
 
