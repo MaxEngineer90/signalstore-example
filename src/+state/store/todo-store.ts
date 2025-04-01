@@ -1,7 +1,7 @@
 import {TodoDto} from '../../models/todo-dto';
 import {patchState, signalStore, withComputed, withHooks, withMethods, withState} from '@ngrx/signals';
 import {computed, inject} from '@angular/core';
-import {TodoBackendService} from '../../service/todo-backend-service';
+import {TodoBackendService} from '../../service/todo/todo-backend-service';
 import {distinctUntilChanged, exhaustMap, pipe, tap} from 'rxjs';
 import {rxMethod} from '@ngrx/signals/rxjs-interop';
 import {tapResponse} from '@ngrx/operators';

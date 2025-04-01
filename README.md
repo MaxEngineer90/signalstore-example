@@ -14,3 +14,5 @@ npm install @ngrx/operators --save
 ````bash
 npm start-server
 ````
+
+## [Configure jest](https://medium.com/edataconsulting/how-to-switch-from-karma-to-jest-using-angular-7335588ffdf0) 

@@ -1,16 +1,19 @@
-import {ChangeDetectionStrategy, Component, inject, Signal} from '@angular/core';
-import {TodoDto} from '../../models/todo-dto';
-import {TodosEntityStore} from '../../+state/entity-store/todo-entity-store';
-import {TodoContainerComponent} from '../todo-container/todo-container.component';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  inject,
+  Signal,
+} from '@angular/core';
+import { TodoDto } from '../../../../models/todo-dto';
+import { TodosEntityStore } from '../../../../+state/entity-store/todo-entity-store';
+import { TodoContainerComponent } from '../todo-container/todo-container.component';
 
 @Component({
   selector: 'app-todo-entity',
-  imports: [
-    TodoContainerComponent
-  ],
+  imports: [TodoContainerComponent],
   templateUrl: './todo-entity.component.html',
-  styleUrl: './todo-entity.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  styleUrl: './todo-entity.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodoEntityComponent {
   readonly entityStore = inject(TodosEntityStore);
@@ -19,7 +22,6 @@ export class TodoEntityComponent {
   selectedTodo = this.entityStore.selectedEntity;
 
   selectTodo(id: number) {
-    this.entityStore.loadTodoById(id);
     this.entityStore.selectTodoById(id);
   }
 

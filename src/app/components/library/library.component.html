@@ -1,0 +1,37 @@
+<mat-card>
+  <h2>Kategorien</h2>
+  @if (categories(); as list) {
+    <mat-nav-list>
+      @for (category of list; track category.id) {
+        <mat-list-item
+          (click)="onSelectCategory(category.id)"
+          [class.selected]="category.id === selectedCategoryId()"
+        >
+          {{ category.name }}
+        </mat-list-item>
+      }
+    </mat-nav-list>
+  }
+</mat-card>
+
+@if (selectedCategory(); as selected) {
+  <mat-card>
+    <h2>Bücher in "{{ selected.name }}"</h2>
+    <mat-divider></mat-divider>
+    @if (booksInSelectedCategory().length > 0) {
+      <mat-list>
+        @for (book of booksInSelectedCategory(); track book.id) {
+          <mat-list-item>
+            {{ book.title }}
+          </mat-list-item>
+        }
+      </mat-list>
+    } @else {
+      <p style="padding: 1rem">Keine Bücher in dieser Kategorie.</p>
+    }
+  </mat-card>
+}
+
+@if (isLoading()) {
+  <mat-spinner diameter="40" class="loading" />
+}

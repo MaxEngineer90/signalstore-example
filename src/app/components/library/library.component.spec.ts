@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { TodoEntityComponent } from './todo-entity.component';
+import { LibraryComponent } from './library.component';
 
-describe('TodoEntityComponent', () => {
-  let component: TodoEntityComponent;
-  let fixture: ComponentFixture<TodoEntityComponent>;
+describe('LibraryComponent', () => {
+  let component: LibraryComponent;
+  let fixture: ComponentFixture<LibraryComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [TodoEntityComponent]
+      imports: [LibraryComponent]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(TodoEntityComponent);
+    fixture = TestBed.createComponent(LibraryComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

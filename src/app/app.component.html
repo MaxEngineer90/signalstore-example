@@ -1,8 +1,28 @@
-<nav>
-  <span>Switch to</span>
-  <button routerLink="/store" routerLinkActive="active">Signal Store</button>
-  <span>or</span>
-  <button routerLink="/entity-store" routerLinkActive="active">Signal EntityStore</button>
-</nav>
+<mat-toolbar color="primary" class="nav-toolbar">
+  <mat-button-toggle-group appearance="legacy" exclusive>
+    <mat-button-toggle
+      [routerLink]="'/store'"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Signal Store
+    </mat-button-toggle>
 
+    <mat-button-toggle
+      [routerLink]="'/entity-store'"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Signal EntityStore
+    </mat-button-toggle>
+
+    <mat-button-toggle
+      [routerLink]="'/library'"
+      routerLinkActive="active-link"
+      [routerLinkActiveOptions]="{ exact: true }"
+    >
+      Library
+    </mat-button-toggle>
+  </mat-button-toggle-group>
+</mat-toolbar>
 <router-outlet></router-outlet>

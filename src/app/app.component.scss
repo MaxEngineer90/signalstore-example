@@ -1,12 +1,21 @@
-nav {
+.nav-toolbar {
   display: flex;
-  width: 100%;
-  height: 100%;
-  gap: 2rem;
-  align-items: center;
   justify-content: center;
+  padding: 0.5rem 1rem;
+  gap: 1rem;
+}
 
-  button, span {
-    font-size: 1.5rem;
-  }
+mat-button-toggle-group {
+  display: flex;
+  gap: 1rem;
+}
+
+.active-link {
+  font-weight: bold;
+  color: white !important;
+  background-color: #303f9f !important;
+}
+
+mat-pseudo-checkbox {
+  color: white !important;
 }
