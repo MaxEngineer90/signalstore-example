@@ -1,3 +1,11 @@
+# [1.1.0](https://github.com/MaxEngineer90/signalstore-example/compare/v1.0.1...v1.1.0) (2025-04-01)
+
+
+### Features
+
+* update Docker build and publish workflow for enhanced semver support ([7fb6097](https://github.com/MaxEngineer90/signalstore-example/commit/7fb6097a4880e0b4b921c31a5f05171cc3d0227c))
+* update Docker build and publish workflow for enhanced semver support ([23884d5](https://github.com/MaxEngineer90/signalstore-example/commit/23884d5ed12b006ef08459fa5b31012e89fb9e68))
+
 ## [1.0.1](https://github.com/MaxEngineer90/signalstore-example/compare/v1.0.0...v1.0.1) (2025-04-01)
 
 
