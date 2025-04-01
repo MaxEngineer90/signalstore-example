@@ -23,12 +23,12 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Wenn der Push auf main erfolgt, nutze das Standard-GITHUB_TOKEN
+
       - name: Run semantic-release on main branch
         if: github.ref == 'refs/heads/main'
         run: npx semantic-release
 
-      # Wenn ein Tag (v*.*.*) gepusht wird, verwende das persönliche Token
+
       - name: Run semantic-release on tag push
         if: startsWith(github.ref, 'refs/tags/v')
         env:
@@ -43,6 +43,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+
+      - name: Update repository to latest main
+        run: |
+          git fetch origin main
+          git reset --hard origin/main
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
