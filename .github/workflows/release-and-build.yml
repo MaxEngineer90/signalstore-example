@@ -1,14 +1,33 @@
-name: Build and Push Docker Images
+name: Release and Build on Master
 
 on:
   push:
     branches:
-      - 'feature/**'
+      - master
 
 jobs:
-  build-and-push:
+  release:
+    name: Semantic Release
     runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run semantic-release
+        run: npx semantic-release
+
+  build:
+    name: Build Main Container
+    needs: release
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -38,8 +57,8 @@ jobs:
 
       - name: Build and push frontend image
         run: |
-          docker build -t ${{ secrets.DOCKER_USERNAME }}/signalstore-frontend:latest -f Dockerfile .
-          docker push ${{ secrets.DOCKER_USERNAME }}/signalstore-frontend:latest
+          docker build -t ${{ secrets.DOCKER_USERNAME }}/signalstore-frontend:${{ steps.get_version.outputs.version }} -f Dockerfile .
+          docker push ${{ secrets.DOCKER_USERNAME }}/signalstore-frontend:${{ steps.get_version.outputs.version }}
 
       - name: Build and push backend image
         run: |
